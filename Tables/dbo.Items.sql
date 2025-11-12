@@ -19,20 +19,37 @@ GO
 
 SET QUOTED_IDENTIFIER, ANSI_NULLS ON
 GO
-CREATE TRIGGER [dbo].[TR_Items_EgresoStock]
+CREATE TRIGGER [dbo].[TR_VerificarStock]
 ON [Items]
 AFTER INSERT
 AS
 BEGIN
-    SET NOCOUNT ON;
+    IF EXISTS (
+        SELECT 1
+        FROM inserted I
+        INNER JOIN Productos P
+            ON I.IDProducto = P.ID
+        WHERE I.Cantidad > P.Stock
+    )
+    BEGIN
+        RAISERROR('No hay suficiente stock para este producto', 16, 1)
+        ROLLBACK TRANSACTION
+    END
+END;
+GO
 
-    INSERT INTO MovimientosStock (IDProducto, TipoMovimiento, Cantidad, Motivo)
-    SELECT 
-        i.IDProducto,
-        'Egreso',
-        i.Cantidad,
-        'Venta (Items)'
-    FROM inserted i;
+SET QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+CREATE TRIGGER [dbo].[TR_RestarStock]
+ON [Items]
+AFTER INSERT
+AS
+BEGIN
+    UPDATE P
+    SET P.Stock = P.Stock - I.Cantidad
+    FROM Productos P
+    INNER JOIN inserted I
+        ON P.ID = I.IDProducto
 END;
 GO
 
