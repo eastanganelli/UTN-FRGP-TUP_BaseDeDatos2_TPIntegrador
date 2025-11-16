@@ -5,7 +5,9 @@
   [Cantidad] [int] NOT NULL,
   [Fecha] [datetime] NOT NULL DEFAULT (getdate()),
   [Motivo] [varchar](100) NULL,
-  PRIMARY KEY CLUSTERED ([ID])
+  PRIMARY KEY CLUSTERED ([ID]),
+  CONSTRAINT [CK_MovimientosStock_Cantidad] CHECK ([Cantidad]>(0)),
+  CONSTRAINT [CK_MovimientosStock_Movimiento] CHECK ([TipoMovimiento]='ingreso' OR [TipoMovimiento]='Ingreso' OR [TipoMovimiento]='egreso' OR [TipoMovimiento]='Egreso')
 )
 ON [PRIMARY]
 GO

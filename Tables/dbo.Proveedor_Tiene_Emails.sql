@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Proveedor_Tiene_Emails] (
   [Correo] [char](100) NOT NULL,
   [IDProveedor] [bigint] NOT NULL,
-  [Tipo] [char](20) NOT NULL,
+  [IDEtiqueta] [int] NOT NULL,
   PRIMARY KEY CLUSTERED ([Correo])
 )
 ON [PRIMARY]

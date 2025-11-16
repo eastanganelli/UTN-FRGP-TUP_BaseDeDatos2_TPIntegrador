@@ -7,3 +7,7 @@
 )
 ON [PRIMARY]
 GO
+
+ALTER TABLE [dbo].[CondicionIVA] WITH NOCHECK
+  ADD CONSTRAINT [CK_CondicionIVA_Porcentaje] CHECK ([Porcentaje]>(0.0))
+GO

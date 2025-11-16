@@ -4,7 +4,7 @@ CREATE VIEW [dbo].[RecaudacionTrimestral] AS
 SELECT 
     YEAR(V.FechaVenta) AS Año,
     DATEPART(QUARTER, V.FechaVenta) AS Trimestre,
-    SUM(I.PrecioTotal) AS RecaudacionTotal
+    SUM(I.Cantidad * I.PrecioUnitario) AS RecaudacionTotal
 FROM Ventas V
 INNER JOIN Items I 
     ON V.ID = I.IDVenta

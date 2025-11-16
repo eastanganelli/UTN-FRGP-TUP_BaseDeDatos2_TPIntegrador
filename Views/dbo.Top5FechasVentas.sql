@@ -3,7 +3,7 @@ GO
 CREATE VIEW [dbo].[Top5FechasVentas] AS
 SELECT TOP 5
     V.FechaVenta,
-    SUM(I.PrecioTotal) AS Recaudacion
+    SUM(I.Cantidad * I.PrecioUnitario) AS Recaudacion
 FROM Ventas V
 INNER JOIN Items I 
     ON V.ID = I.IDVenta

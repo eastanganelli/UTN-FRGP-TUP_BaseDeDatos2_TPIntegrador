@@ -5,7 +5,7 @@ SELECT TOP 10
     P.ID AS IDProducto,
     P.Nombre AS Producto,
     SUM(I.Cantidad) AS UnidadesVendidas,
-    SUM(I.PrecioTotal) AS Recaudacion
+    SUM(I.Cantidad * I.PrecioUnitario) AS Recaudacion
 FROM Items I
 INNER JOIN Productos P 
     ON I.IDProducto = P.ID

@@ -7,8 +7,11 @@
   [CUIT_CUIL] [varchar](15) NULL,
   [Alta] [bit] NOT NULL DEFAULT (1),
   [Email] [varchar](225) NULL,
-  [TotalCompras] [decimal](18, 2) NULL DEFAULT (0),
   PRIMARY KEY CLUSTERED ([ID])
 )
 ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Clientes]
+  ADD CONSTRAINT [FK_Clientes_TipoDeResponsables] FOREIGN KEY ([IDTipoResponsable]) REFERENCES [dbo].[TipoDeResponsables] ([ID])
 GO

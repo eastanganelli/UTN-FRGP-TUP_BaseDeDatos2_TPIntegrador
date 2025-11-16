@@ -4,7 +4,9 @@
   [Precio] [decimal](18, 2) NOT NULL,
   [FechaDesde] [datetime] NOT NULL DEFAULT (getdate()),
   [FechaHasta] [datetime] NULL,
-  PRIMARY KEY CLUSTERED ([ID])
+  PRIMARY KEY CLUSTERED ([ID]),
+  CONSTRAINT [CK_HistorialPrecios_Desde_Hasta] CHECK ([FechaHasta]>[FechaDesde]),
+  CONSTRAINT [CK_HistorialPrecios_Precio] CHECK ([Precio]>(0))
 )
 ON [PRIMARY]
 GO

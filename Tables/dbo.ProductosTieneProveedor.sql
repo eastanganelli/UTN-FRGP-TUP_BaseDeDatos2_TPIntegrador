@@ -2,7 +2,8 @@
   [IDProducto] [bigint] NOT NULL,
   [IDProveedor] [bigint] NOT NULL,
   [PrecioProveedor] [decimal](10, 2) NOT NULL,
-  CONSTRAINT [PK_ProductosTieneProveedor] PRIMARY KEY CLUSTERED ([IDProducto], [IDProveedor])
+  CONSTRAINT [PK_ProductosTieneProveedor] PRIMARY KEY CLUSTERED ([IDProducto], [IDProveedor]),
+  CONSTRAINT [CK_ProductosTieneProveedor_PrecioProveedor] CHECK ([PrecioProveedor]>(0))
 )
 ON [PRIMARY]
 GO

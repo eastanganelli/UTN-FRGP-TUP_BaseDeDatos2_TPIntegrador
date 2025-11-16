@@ -3,7 +3,7 @@ GO
 CREATE VIEW [dbo].[RecaudacionAnual] AS
 SELECT 
     YEAR(V.FechaVenta) AS Año,
-    SUM(I.PrecioTotal) AS RecaudacionTotal
+    SUM(I.Cantidad * I.PrecioUnitario) AS RecaudacionTotal
 FROM Ventas V
 INNER JOIN Items I 
     ON V.ID = I.IDVenta

@@ -6,7 +6,9 @@
   [Stock] [int] NOT NULL,
   [IDCategoria] [bigint] NOT NULL,
   PRIMARY KEY CLUSTERED ([ID]),
-  UNIQUE ([ID])
+  UNIQUE ([ID]),
+  CONSTRAINT [CK_Productos_Precio] CHECK ([Precio]>(0)),
+  CONSTRAINT [CK_Productos_Stock] CHECK ([Stock]>=(0))
 )
 ON [PRIMARY]
 GO

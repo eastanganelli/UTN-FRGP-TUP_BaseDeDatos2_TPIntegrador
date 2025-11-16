@@ -6,7 +6,8 @@
   [CAE] [varchar](60) NULL,
   [VencimientoCAE] [date] NULL,
   PRIMARY KEY CLUSTERED ([ID]),
-  UNIQUE ([ID])
+  UNIQUE ([ID]),
+  CONSTRAINT [CK_Ventas_VencimientoCAE] CHECK ([VencimientoCAE]>=[FechaVenta])
 )
 ON [PRIMARY]
 GO
@@ -33,29 +34,14 @@ END;
 
 GO
 
-SET QUOTED_IDENTIFIER, ANSI_NULLS ON
-GO
-CREATE TRIGGER [dbo].[TR_ActualizarTotalCliente]
-ON [Ventas]
-AFTER INSERT
-AS
-BEGIN
-    UPDATE C
-    SET C.TotalCompras = C.TotalCompras + S.Total
-    FROM Clientes C
-    INNER JOIN (
-        SELECT V.IDCliente, SUM(I.PrecioTotal) AS Total
-        FROM inserted V
-        INNER JOIN Items I ON V.ID = I.IDVenta
-        GROUP BY V.IDCliente
-    ) S ON C.ID = S.IDCliente
-END;
-GO
-
 ALTER TABLE [dbo].[Ventas] WITH NOCHECK
   ADD FOREIGN KEY ([IDTipoComprobante]) REFERENCES [dbo].[TipoDeComprobante] ([ID])
 GO
 
 ALTER TABLE [dbo].[Ventas] WITH NOCHECK
   ADD FOREIGN KEY ([IDTipoComprobante]) REFERENCES [dbo].[TipoDeComprobante] ([ID])
+GO
+
+ALTER TABLE [dbo].[Ventas]
+  ADD CONSTRAINT [FK_Ventas_Clientes] FOREIGN KEY ([IDCliente ]) REFERENCES [dbo].[Clientes] ([ID])
 GO

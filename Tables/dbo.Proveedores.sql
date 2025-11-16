@@ -16,7 +16,3 @@ GO
 ALTER TABLE [dbo].[Proveedores] WITH NOCHECK
   ADD FOREIGN KEY ([IDTipoResponsable]) REFERENCES [dbo].[TipoDeResponsables] ([ID])
 GO
-
-ALTER TABLE [dbo].[Proveedores] WITH NOCHECK
-  ADD FOREIGN KEY ([IDTipoResponsable]) REFERENCES [dbo].[TipoDeResponsables] ([ID])
-GO

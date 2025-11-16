@@ -5,7 +5,7 @@ SELECT TOP 1
     C.ID AS ClienteID,
     C.Nombre,
     COUNT(V.ID) AS CantidadCompras,
-    SUM(I.PrecioTotal) AS MontoTotal
+    SUM(I.Cantidad * I.PrecioUnitario) AS MontoTotal
 FROM Ventas V
 INNER JOIN Items I
     ON V.ID = I.IDVenta

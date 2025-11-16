@@ -4,10 +4,11 @@
   [IDProducto] [bigint] NOT NULL,
   [Cantidad] [int] NOT NULL,
   [PrecioUnitario] [decimal] NOT NULL,
-  [PrecioTotal] [decimal] NOT NULL,
   [IDCondicionIVA] [smallint] NOT NULL,
   PRIMARY KEY CLUSTERED ([ID]),
-  UNIQUE ([ID])
+  UNIQUE ([ID]),
+  CONSTRAINT [CK_Items_Cantidad] CHECK ([Cantidad]>=(0)),
+  CONSTRAINT [CK_Items_PrecioUnitario] CHECK ([PrecioUnitario]>(0))
 )
 ON [PRIMARY]
 GO
@@ -59,4 +60,12 @@ GO
 
 ALTER TABLE [dbo].[Items] WITH NOCHECK
   ADD FOREIGN KEY ([IDCondicionIVA]) REFERENCES [dbo].[CondicionIVA] ([ID])
+GO
+
+ALTER TABLE [dbo].[Items]
+  ADD CONSTRAINT [FK_Items_Productos] FOREIGN KEY ([IDProducto]) REFERENCES [dbo].[Productos] ([ID])
+GO
+
+ALTER TABLE [dbo].[Items]
+  ADD CONSTRAINT [FK_Items_Ventas] FOREIGN KEY ([IDVenta]) REFERENCES [dbo].[Ventas] ([ID])
 GO
