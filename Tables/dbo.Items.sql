@@ -4,7 +4,6 @@
   [IDProducto] [bigint] NOT NULL,
   [Cantidad] [int] NOT NULL,
   [PrecioUnitario] [decimal] NOT NULL,
-  [IDCondicionIVA] [smallint] NOT NULL,
   PRIMARY KEY CLUSTERED ([ID]),
   UNIQUE ([ID]),
   CONSTRAINT [CK_Items_Cantidad] CHECK ([Cantidad]>=(0)),
@@ -52,14 +51,6 @@ BEGIN
     INNER JOIN inserted I
         ON P.ID = I.IDProducto
 END;
-GO
-
-ALTER TABLE [dbo].[Items] WITH NOCHECK
-  ADD FOREIGN KEY ([IDCondicionIVA]) REFERENCES [dbo].[CondicionIVA] ([ID])
-GO
-
-ALTER TABLE [dbo].[Items] WITH NOCHECK
-  ADD FOREIGN KEY ([IDCondicionIVA]) REFERENCES [dbo].[CondicionIVA] ([ID])
 GO
 
 ALTER TABLE [dbo].[Items]

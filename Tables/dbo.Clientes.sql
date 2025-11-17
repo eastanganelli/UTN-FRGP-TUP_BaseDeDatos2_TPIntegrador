@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Clientes] (
   [ID] [bigint] IDENTITY,
-  [IDTipoResponsable] [smallint] NOT NULL,
+  [IDCondicionIVA] [smallint] NOT NULL,
   [Nombre] [varchar](100) NOT NULL,
   [Apellido] [varchar](100) NOT NULL,
   [Telefono] [varchar](15) NULL,
@@ -13,5 +13,5 @@ ON [PRIMARY]
 GO
 
 ALTER TABLE [dbo].[Clientes]
-  ADD CONSTRAINT [FK_Clientes_TipoDeResponsables] FOREIGN KEY ([IDTipoResponsable]) REFERENCES [dbo].[TipoDeResponsables] ([ID])
+  ADD CONSTRAINT [FK_Clientes_CondicionIVA_ID] FOREIGN KEY ([IDCondicionIVA]) REFERENCES [dbo].[CondicionIVA] ([ID]) ON UPDATE CASCADE
 GO

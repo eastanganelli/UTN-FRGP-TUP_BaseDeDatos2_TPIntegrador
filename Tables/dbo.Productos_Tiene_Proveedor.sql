@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ProductosTieneProveedor] (
+﻿CREATE TABLE [dbo].[Productos_Tiene_Proveedor] (
   [IDProducto] [bigint] NOT NULL,
   [IDProveedor] [bigint] NOT NULL,
   [PrecioProveedor] [decimal](10, 2) NOT NULL,
@@ -8,10 +8,10 @@
 ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[ProductosTieneProveedor]
+ALTER TABLE [dbo].[Productos_Tiene_Proveedor]
   ADD CONSTRAINT [FK_PTP_Producto] FOREIGN KEY ([IDProducto]) REFERENCES [dbo].[Productos] ([ID])
 GO
 
-ALTER TABLE [dbo].[ProductosTieneProveedor]
+ALTER TABLE [dbo].[Productos_Tiene_Proveedor]
   ADD CONSTRAINT [FK_PTP_Proveedor] FOREIGN KEY ([IDProveedor]) REFERENCES [dbo].[Proveedores] ([ID])
 GO

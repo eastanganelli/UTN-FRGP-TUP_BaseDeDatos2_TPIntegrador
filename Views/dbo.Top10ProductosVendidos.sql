@@ -1,16 +1,16 @@
 ﻿SET QUOTED_IDENTIFIER, ANSI_NULLS ON
 GO
-CREATE VIEW [dbo].[Top10ProductosVendidos] AS
-SELECT TOP 10
+CREATE VIEW [dbo].[Top10ProductosVendidos] 
+AS SELECT TOP 10
     P.ID AS IDProducto,
     P.Nombre AS Producto,
-    SUM(I.Cantidad) AS UnidadesVendidas,
-    SUM(I.Cantidad * I.PrecioUnitario) AS Recaudacion
-FROM Items I
-INNER JOIN Productos P 
-    ON I.IDProducto = P.ID
-GROUP BY 
-    P.ID, P.Nombre
-ORDER BY 
-    UnidadesVendidas DESC;  -- OK, porque usamos TOP
+    SUM(ict.Cantidad) AS UnidadesVendidas,
+    SUM(ict.Total) AS Recaudacion
+FROM ItemsConTotales ict
+INNER JOIN Productos P ON ict.IDProducto = P.ID
+INNER JOIN Ventas v ON ict.ID = v.ID
+INNER JOIN TipoDeComprobante tdc ON v.IDTipoComprobante = tdc.ID
+WHERE tdc.TipoComprobante LIKE 'FACTURAS%'
+GROUP BY P.ID, P.Nombre
+ORDER BY UnidadesVendidas DESC
 GO

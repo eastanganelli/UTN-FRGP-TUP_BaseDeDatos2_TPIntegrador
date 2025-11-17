@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[Proveedores] (
   [ID] [bigint] IDENTITY,
-  [IDTipoResponsable] [smallint] NOT NULL,
+  [IDCondicionIVA] [smallint] NOT NULL,
   [Nombre] [varchar](100) NOT NULL,
   [Telefono] [varchar](15) NOT NULL,
   [Direccion] [varchar](150) NOT NULL,
@@ -13,6 +13,6 @@
 ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[Proveedores] WITH NOCHECK
-  ADD FOREIGN KEY ([IDTipoResponsable]) REFERENCES [dbo].[TipoDeResponsables] ([ID])
+ALTER TABLE [dbo].[Proveedores]
+  ADD CONSTRAINT [FK_Proveedores_CondicionIVA_ID] FOREIGN KEY ([IDCondicionIVA]) REFERENCES [dbo].[CondicionIVA] ([ID])
 GO

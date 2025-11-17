@@ -1,0 +1,10 @@
+﻿SET QUOTED_IDENTIFIER, ANSI_NULLS ON
+GO
+CREATE PROCEDURE [dbo].[ContarFacturasSinCAE]
+AS
+BEGIN
+    SELECT COUNT(*) AS NumeroFacturas
+    FROM Facturas
+    WHERE CAE IS NULL AND VencimientoCAE IS NULL;
+END;
+GO
