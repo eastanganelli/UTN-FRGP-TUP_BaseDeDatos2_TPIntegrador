@@ -1,5 +1,4 @@
 # Trabajo Práctico Integrador — Base de Datos 2
-Repositorio: eastanganelli/UTN-FRGP-TUP_BaseDeDatos2_TPIntegrador
 
 ## Índice
 - [Trabajo Práctico Integrador — Base de Datos 2](#trabajo-práctico-integrador--base-de-datos-2)
